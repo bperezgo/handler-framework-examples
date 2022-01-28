@@ -14,7 +14,11 @@ func main() {
 	}{
 		value: "value",
 	}
-	handler := handlerLib.ComposeHandlers(handler1, handler2)
+	dummyObject := &ConcreteDummyObject{}
+	handler1 := Handler1{
+		dummyObject: dummyObject,
+	}
+	handler := handlerLib.ComposeHandlers(handler1.Handle, handler2)
 	res := handler.Handle(ctx, req)
 	log.Println("RESPONSE", res)
 }
